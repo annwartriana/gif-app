@@ -1,24 +1,27 @@
-import {useState} from 'react';
+import { useState } from "react";
 
-export const AddCategory = () => {
+// eslint-disable-next-line react/prop-types
+export const AddCategory = ({ onNewCategory }) => {
+  const [inputValue, setInputValue] = useState("Hunter x Hunter");
 
-  const [inputValue, setInputValue] = useState('One');
-
-  const onInputChange = ({target})=>{
+  const onInputChange = ({ target }) => {
     setInputValue(target.value);
-  }
+  };
 
-  const onSubmit= ()=>{
+  const onSubmit = () => {
     event.preventDefault();
-  }
+    const newInputValue = inputValue.trim();
+    if (newInputValue.length <= 1) return;
+    onNewCategory(newInputValue);
+  };
 
   return (
     <form onSubmit={onSubmit}>
-      <input 
+      <input
         type="text"
         placeholder="Buscar gifs"
-        value={ inputValue }
-        onChange = {onInputChange}
+        value={inputValue}
+        onChange={onInputChange}
       />
     </form>
   );
